@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>秒懂AI提问：20种高效提问方法与实战指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        :root {
+            --bg-color: #f5f7fa;
+            --text-color: #333;
+            --card-bg: white;
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --border-color: #eee;
+            --note-bg: #fff3cd;
+            --note-border: #ffc107;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --card-bg: #2d2d2d;
+            --primary-color: #7b9de4;
+            --secondary-color: #9b7fb8;
+            --border-color: #444;
+            --note-bg: #3a3000;
+            --note-border: #8b7500;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 40px;
+        }
+
+        header .header-left {
+            flex: 1;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .theme-toggle, .print-btn {
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover, .print-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        .toc {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .toc h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            columns: 2;
+            gap: 20px;
+        }
+
+        .toc ul li {
+            margin-bottom: 8px;
+        }
+
+        .toc ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc ul li a:hover {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            color: var(--text-color);
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .section h3 {
+            color: var(--secondary-color);
+            margin: 15px 0 10px;
+        }
+
+        .section p {
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .section ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: var(--bg-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .section table th,
+        .section table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .section table th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        .section table tr:hover {
+            background: var(--border-color);
+        }
+
+        .note {
+            background: var(--note-bg);
+            border-left: 4px solid var(--note-border);
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: var(--text-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            color: var(--text-color);
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        #backToTop {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        #backToTop:hover {
+            background: var(--secondary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        #backToTop.show {
+            display: block;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+        }
+
+        .good-case {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .bad-case {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .decision-tree {
+            background: var(--bg-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .tree-node {
+            margin-left: 20px;
+            padding: 10px;
+            border-left: 3px solid var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .faq-item {
+            background: var(--bg-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            background: var(--border-color);
+            padding-left: 20px;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .combo-badge {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin: 5px 5px 5px 0;
+        }
+
+        .feedback-form {
+            background: var(--bg-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .feedback-form input,
+        .feedback-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .feedback-form select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .feedback-form button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .feedback-form button:hover {
+            background: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .toc ul {
+                columns: 1;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            header .header-left {
+                width: 100%;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            #backToTop {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+
+            .header-controls {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media print {
+            header, .header-controls, #backToTop, .theme-toggle, .print-btn {
+                display: none;
+            }
+
+            .section {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+
+            .toc {
+                page-break-inside: avoid;
+            }
+
+            body {
+                background-color: white;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button id="backToTop">↑</button>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1>秒懂AI提问</h1>
+                <p>20种高效提问方法与实战指南，让AI成为你的超级助手</p>
+            </div>
+            <div class="header-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">🌙深色</button>
+                <button class="print-btn" onclick="window.print()">🖨️打印</button>
+            </div>
+        </header>
+
+        <div class="toc">
+            <h2>目录</h2>
+            <ul>
+                <li><a href="#sec1">一、指令式提问</a></li>
+                <li><a href="#sec2">二、角色式提问</a></li>
+                <li><a href="#sec3">三、关键词提问</a></li>
+                <li><a href="#sec4">四、示例式提问</a></li>
+                <li><a href="#sec5">五、引导提问</a></li>
+                <li><a href="#sec6">六、发散提问</a></li>
+                <li><a href="#sec7">七、问答式提问</a></li>
+                <li><a href="#sec8">八、提炼压缩式提问</a></li>
+                <li><a href="#sec9">九、对话式提问</a></li>
+                <li><a href="#sec10">十、信息一致性提问</a></li>
+                <li><a href="#sec11">十一、信息整合提问</a></li>
+                <li><a href="#sec12">十二、多项选择提问</a></li>
+                <li><a href="#sec13">十三、约束提问</a></li>
+                <li><a href="#sec14">十四、对立提问</a></li>
+                <li><a href="#sec15">十五、归纳提问</a></li>
+                <li><a href="#sec16">十六、循环提问</a></li>
+                <li><a href="#sec17">十七、迭代式提问</a></li>
+                <li><a href="#sec18">十八、进阶式提问</a></li>
+                <li><a href="#sec19">十九、人情练达提问</a></li>
+                <li><a href="#sec20">二十、多维视角提问</a></li>
+                <li><a href="#quick-ref">快速参考表</a></li>
+                <li><a href="#cases">实战案例</a></li>
+                <li><a href="#faq">常见问题</a></li>
+                <li><a href="#combo">方法组合指南</a></li>
+                <li><a href="#guide">速查工具</a></li>
+            </ul>
+        </div>
+
+        <div id="sec1" class="section">
+            <h2>一、指令式提问：像给下属布置任务一样</h2>
+            <h3>核心逻辑</h3>
+            <p>明确问题范围与回答要求，确保AI输出精准匹配需求，适用于<strong>标准化工作、规范流程、明确目标</strong>的场景。</p>
+            <h3>好指令的四大原则</h3>
+            <table>
+                <tr>
+                    <th>原则</th>
+                    <th>核心要求</th>
+                </tr>
+                <tr>
+                    <td>结构清晰</td>
+                    <td>用5W/SCQA/黄金三点法等经典结构梳理逻辑，让指令更有条理</td>
+                </tr>
+                <tr>
+                    <td>重点突出</td>
+                    <td>拆分长句、避免冗余，用序号/加粗突出核心要求</td>
+                </tr>
+                <tr>
+                    <td>语言简练</td>
+                    <td>多用短句、少用长句，提升信息传递效率</td>
+                </tr>
+                <tr>
+                    <td>易于理解</td>
+                    <td>用量化/具象化词汇，避免模糊表述（如用“控制在300字内”替代“不要太长”）</td>
+                </tr>
+            </table>
+            <h3>经典结构工具</h3>
+            <ul>
+                <li><strong>5W结构</strong>：Who/What/When/Where/Why，明确任务的人、事、时间、地点、原因</li>
+                <li><strong>SCQA模型</strong>：Situation（情景）→ Complication（冲突）→ Question（问题）→ Answer（回答），适配工作汇报/方案撰写</li>
+                <li><strong>黄金三点法</strong>：是什么/为什么/怎么做，适配培训大纲、方案设计等结构化输出</li>
+            </ul>
+            <div class="note">
+                <strong>注意事项</strong>：指令越清晰、越具体，AI回答越精准；可让AI提供写作框架，再基于框架生成内容；适用于工作中不明确写作结构的场景（如会议记录、公文）
+            </div>
+        </div>
+
+        <div id="sec2" class="section">
+            <h2>二、角色式提问：给AI指定身份</h2>
+            <h3>核心逻辑</h3>
+            <p>让AI以特定身份/视角回答问题，提升回答的专业性、针对性，适用于<strong>专业咨询、创意创作、模拟对话</strong>场景。</p>
+            <h3>常用句式</h3>
+            <ul>
+                <li>我想让你扮演一名xxx</li>
+                <li>假设你是xxx</li>
+                <li>请你担任xxx</li>
+                <li>你是一位xxx</li>
+            </ul>
+            <h3>适用场景</h3>
+            <ul>
+                <li><strong>专业领域</strong>：营养师、健身教练、律师、医生（需注意：AI仅作参考，不能替代专业人士）</li>
+                <li><strong>创意领域</strong>：游戏对话设计、小说创作、剧本写作</li>
+                <li><strong>职场场景</strong>：模拟面试、跨部门沟通话术、客户谈判</li>
+            </ul>
+            <div class="note">
+                <strong>注意事项</strong>：可与指令式提问结合，用专业身份+明确指令提升回答质量；医学/法律/学术等领域，AI回答仅作参考，需以专业人士结论为准
+            </div>
+        </div>
+
+        <div id="sec3" class="section">
+            <h2>三、关键词提问：让数据更具针对性</h2>
+            <h3>核心逻辑</h3>
+            <p>通过关键词锚定问题核心，帮助AI精准理解需求、聚焦回答，适用于<strong>信息检索、问题拆解、精准问答</strong>。</p>
+            <h3>关键词确定方法</h3>
+            <ol>
+                <li><strong>抓核心</strong>：直接提炼问题的主要内容</li>
+                <li><strong>保简洁</strong>：选择最相关、最能描述问题的关键词，避免冗余</li>
+                <li><strong>用术语</strong>：使用对应领域专业术语，提升回答专业性</li>
+                <li><strong>避歧义</strong>：确保关键词语境清晰，避免易误解表述</li>
+                <li><strong>结合场景</strong>：关联具体情景/案例/背景，让AI更懂需求</li>
+                <li><strong>换同义</strong>：若回答不满意，可尝试同义词/相关词汇</li>
+                <li><strong>细化问题</strong>：问题过宽时，用更具体的关键词缩小范围</li>
+            </ol>
+            <div class="note">
+                <strong>注意事项</strong>：关键词越抽象，AI理解偏差概率越高；越清晰具体，回答越贴合预期；需对相关领域有一定了解，避免使用错误词汇；可与角色式/指令式提问结合使用
+            </div>
+        </div>
+
+        <div id="sec4" class="section">
+            <h2>四、示例式提问：让AI快速理解你的需求</h2>
+            <h3>核心逻辑</h3>
+            <p>先让AI生成示例，确认符合预期后再批量生成，适用于<strong>格式统一、风格明确、批量产出</strong>的场景（如学术论文、文案、表格）。</p>
+            <h3>应用场景</h3>
+            <table>
+                <tr>
+                    <th>应用场景</th>
+                    <th>操作方法</th>
+                </tr>
+                <tr>
+                    <td>AI出模板</td>
+                    <td>让AI生成可直接套用的模板，确认后批量生成</td>
+                </tr>
+                <tr>
+                    <td>AI出风格</td>
+                    <td>让AI生成符合目标风格的内容，确认后统一风格</td>
+                </tr>
+                <tr>
+                    <td>AI出真人</td>
+                    <td>让AI模拟真实人物的表达，确认后批量创作</td>
+                </tr>
+            </table>
+            <div class="note">
+                <strong>注意事项</strong>：选择<strong>有代表性</strong>的示例，确保AI理解核心要求；确认示例后，要求AI总结示例特点，避免理解偏差；示例中需清晰表达重点信息，防止无关信息干扰
+            </div>
+        </div>
+
+        <div id="sec5" class="section">
+            <h2>五、引导提问：让AI生成更多创意</h2>
+            <h3>核心逻辑</h3>
+            <p>用开放性问题引导AI深度思考，激发创意与多元视角，适用于<strong>头脑风暴、方案优化、深度分析</strong>。</p>
+            <h3>常用句式</h3>
+            <ul>
+                <li>让我们思考一下……</li>
+                <li>让我们想一想……</li>
+                <li>让我们讨论一下……</li>
+                <li>继续追问，以扩大AI思考范围</li>
+            </ul>
+            <h3>苏格拉底式提问（深度思考神器）</h3>
+            <p>通过层层递进的问题引导深度思考，核心特点：</p>
+            <ul>
+                <li>引导性：不直接给答案，引导思考</li>
+                <li>递进性：由浅入深，逐步深入</li>
+                <li>反思性：鼓励对观点进行反思审视</li>
+                <li>逻辑性：关注论证的逻辑合理性</li>
+            </ul>
+            <h3>6种经典苏格拉底式提问</h3>
+            <ol>
+                <li>澄清问题：“你可以举个例子，说明你表达的意思”</li>
+                <li>检验假设：“你如何证明这个假设”</li>
+                <li>理性分析：“你是如何得出这一结论的”</li>
+                <li>检验观点：“你提出的这个方案有哪些优缺点”</li>
+                <li>开阔思路：“对于这个问题你觉得其他人可能会怎么看”</li>
+                <li>思考后果：“你觉得你这个假设会有什么结果呢”</li>
+            </ol>
+            <div class="note">
+                <strong>注意事项</strong>：指定专家身份时，需明确为<strong>真实名人</strong>，否则AI无法从专家视角回答；可让AI从多个专家视角（不同领域）回答，提升多元性；若回答不完整，可回复“继续”让AI补充
+            </div>
+        </div>
+
+        <div id="sec6" class="section">
+            <h2>六、发散提问：让AI提供多种创意思路</h2>
+            <h3>核心逻辑</h3>
+            <p>从多个维度提出问题，拓展思路、打破思维局限，适用于<strong>创意激发、问题解决、方案 brainstorm</strong>。</p>
+            <h3>核心价值</h3>
+            <ul>
+                <li>缺乏灵感时，帮你挖掘更多创意想法</li>
+                <li>复杂问题中，找到更多可能的解决方案</li>
+                <li>深入研究领域时，从不同角度探索新信息</li>
+                <li>决策规划时，分析不同选项的优劣与影响</li>
+            </ul>
+            <h3>关键提示</h3>
+            <p>需明确3个核心要素：<strong>背景信息、所需内容、具体要求</strong></p>
+            <div class="note">
+                <strong>注意事项</strong>：AI创意可能天马行空，需结合实际筛选优化；若初始回答不满意，可补充更多背景信息，多次引导生成
+            </div>
+        </div>
+
+        <div id="sec7" class="section">
+            <h2>七、问答式提问：让AI回答指定问题</h2>
+            <h3>核心逻辑</h3>
+            <p>用结构化问题引导AI精准回答，适用于<strong>知识学习、信息检索、问题拆解</strong>。</p>
+            <h3>8种问题类型</h3>
+            <ol>
+                <li>事实型：A是什么？</li>
+                <li>概念型：A的含义是什么？</li>
+                <li>比较型：A和B有什么区别？</li>
+                <li>因果型：A会对B产生什么影响？</li>
+                <li>假设型：假设A，会发生什么？</li>
+                <li>方法型：如何完成A事情/解决A问题？</li>
+                <li>意义型：A对B有怎样的意义？</li>
+                <li>组合型：多类型问题结合（如事实+方法、概念+比较）</li>
+            </ol>
+            <div class="note">
+                <strong>注意事项</strong>：法律/医疗等领域，AI仅作参考，不能替代专业人士；复杂问题用简洁、清晰、明确的语言提问，提升理解效率
+            </div>
+        </div>
+
+        <div id="sec8" class="section">
+            <h2>八、提炼压缩式提问：帮信息减负</h2>
+            <h3>核心逻辑</h3>
+            <p>让AI提炼核心信息、压缩内容，适用于<strong>长文总结、报告提炼、信息精简</strong>。</p>
+            <h3>操作要点</h3>
+            <ul>
+                <li>明确提炼要求：如“提炼核心观点”“总结3个关键点”</li>
+                <li>量化要求：如“控制在8字以内”“总结不超过300字”</li>
+                <li>明确提炼类型：如“生成概括性摘要”“生成详细摘要”</li>
+            </ul>
+            <div class="note">
+                <strong>注意事项</strong>：可对任意长度文本进行精简提取；若摘要长度不足，可让AI继续补充；需明确提炼的核心维度（如核心观点、关键数据）
+            </div>
+        </div>
+
+        <div id="sec9" class="section">
+            <h2>九、对话式提问：让沟通更加人性化</h2>
+            <h3>核心逻辑</h3>
+            <p>模拟真实对话场景，让AI生成自然流畅的对话内容，适用于<strong>对话设计、话术生成、模拟沟通</strong>。</p>
+            <h3>核心要素</h3>
+            <ol>
+                <li>对话主题：明确对话的核心话题（如旅游、科技、文化）</li>
+                <li>对话角色：明确参与者身份与关系</li>
+                <li>对话场景：明确对话发生的场景</li>
+                <li>对话目的：明确对话要达成的结果</li>
+                <li>对话风格：明确对话的语气（如正式、轻松、幽默）</li>
+                <li>对话长度：明确对话的字数/轮次</li>
+                <li>参考资料：提供相关背景资料，提升对话真实性</li>
+            </ol>
+            <div class="note">
+                <strong>注意事项</strong>：需避免不当言论，防止生成有偏差/误导性内容；需明确隐私保护要求，避免泄露敏感信息
+            </div>
+        </div>
+
+        <div id="sec10" class="section">
+            <h2>十、信息一致性提问：确保回答准确</h2>
+            <h3>核心逻辑</h3>
+            <p>确保AI回答前后一致、逻辑自洽，适用于<strong>长文生成、方案撰写、报告输出</strong>。</p>
+            <h3>操作要点</h3>
+            <ul>
+                <li>一次提问只涉及一个主题，避免多主题混乱</li>
+                <li>提供足够的上下文信息，帮助AI理解背景</li>
+                <li>复杂问题拆分为多个简单问题，逐个提问</li>
+                <li>分步提问，确保每一步回答一致清晰</li>
+            </ul>
+            <div class="note">
+                <strong>注意事项</strong>：问题信息越明确，AI回答越精准；可根据AI回答质量，调整提问策略（如补充信息、重新表述）
+            </div>
+        </div>
+
+        <div id="sec11" class="section">
+            <h2>十一、信息整合提问：高效合并信息</h2>
+            <h3>核心逻辑</h3>
+            <p>让AI整合多来源信息，形成完整结论，适用于<strong>行业研究、报告撰写、信息汇总</strong>。</p>
+            <h3>5种整合方式</h3>
+            <ol>
+                <li><strong>主题整合</strong>：围绕特定主题，整合相关信息</li>
+                <li><strong>时间整合</strong>：按时间顺序梳理事件发展脉络</li>
+                <li><strong>观点整合</strong>：整合不同主体的观点，全面呈现问题</li>
+                <li><strong>跨学科整合</strong>：整合多学科信息，形成跨领域结论</li>
+                <li><strong>媒体整合</strong>：整合不同媒体来源的信息，全面呈现事实</li>
+            </ol>
+            <div class="note">
+                <strong>注意事项</strong>：剔除与问题不相关的信息，确保内容聚焦；从多个角度分析信息，避免片面结论；关注信息的准确性、权威性、时效性
+            </div>
+        </div>
+
+        <div id="sec12" class="section">
+            <h2>十二、多项选择提问：快速缩小范围</h2>
+            <h3>核心逻辑</h3>
+            <p>给AI提供选项，让其针对性回答，适用于<strong>决策辅助、方案筛选、问题聚焦</strong>。</p>
+            <div class="note">
+                <strong>注意事项</strong>：选项需与主题强相关、符合实际，避免误导性选项；选项数量适中，适配问题复杂度（一般3-5个最优）；可设置“自由发挥”选项，补充AI的创意想法
+            </div>
+        </div>
+
+        <div id="sec13" class="section">
+            <h2>十三、约束提问：让AI在指定框架内作答</h2>
+            <h3>核心逻辑</h3>
+            <p>给AI设定明确的约束条件（格式、风格、字数等），让其按要求输出，适用于<strong>标准化输出、模板生成、规范内容</strong>。</p>
+            <h3>公式</h3>
+            <p><strong>所需内容的模板/框架/风格 + 其他约束条件 = 约束提问</strong></p>
+            <h3>适用场景</h3>
+            <p>项目管理、团队管理、方案撰写、规范流程等需要标准化输出的场景</p>
+            <div class="note">
+                <strong>注意事项</strong>：需明确约束条件，避免模糊表述；约束条件越多，AI回答越精准，但灵活性越低；可分步添加约束，逐步优化回答
+            </div>
+        </div>
+
+        <div id="sec14" class="section">
+            <h2>十四、对立提问：倒逼输出不同视角</h2>
+            <h3>核心逻辑</h3>
+            <p>用对立/反向问题引导AI从不同视角思考，适用于<strong>方案优化、风险评估、批判性思考</strong>。</p>
+            <h3>6种经典对立提问</h3>
+            <ol>
+                <li><strong>反向思考式</strong>：如果这个想法失败了，会有哪些负面影响？</li>
+                <li><strong>反面思考式</strong>：如果站在对方立场，会采取哪些不同的思考？</li>
+                <li><strong>对比思考式</strong>：与其他方案相比，这个方案有哪些优劣势？</li>
+                <li><strong>反思思考式</strong>：如果站在对方立场，会有哪些不同的看法或考虑？</li>
+                <li><strong>反问观点式</strong>：如果你的观点是错的，那么正确的是什么？</li>
+                <li><strong>反问模式</strong>：如果你的决策是错的，那么正确的决策是什么？</li>
+            </ol>
+            <div class="note">
+                <strong>注意事项</strong>：提供足够背景信息，让AI全面理解问题；从多个角度提问，提升回答的全面性
+            </div>
+        </div>
+
+        <div id="sec15" class="section">
+            <h2>十五、归纳提问：对信息快速分类</h2>
+            <h3>核心逻辑</h3>
+            <p>让AI对信息进行归纳分类，梳理逻辑结构，适用于<strong>信息梳理、报告撰写、知识总结</strong>。</p>
+            <h3>常用归纳维度</h3>
+            <ul>
+                <li>表示分类：分为、归类、总结、概括</li>
+                <li>表示层级：分为、归纳、总结</li>
+                <li>表示比较：相同、相似、不同、对比</li>
+                <li>表示举例：例如、比如、举个例子</li>
+                <li>表示细节：具体、详细、具体来说</li>
+            </ul>
+            <div class="note">
+                <strong>注意事项</strong>：提供相关资料/数据，否则AI无法精准归纳；用专业术语提问，提升归纳的专业性
+            </div>
+        </div>
+
+        <div id="sec16" class="section">
+            <h2>十六、循环提问：让AI自我进化</h2>
+            <h3>核心逻辑</h3>
+            <p>通过反馈迭代，让AI不断优化回答，适用于<strong>方案优化、内容打磨、需求迭代</strong>。</p>
+            <h3>操作步骤</h3>
+            <ol>
+                <li>提问，要求AI给出答案</li>
+                <li>对答案进行评估</li>
+                <li>反馈：“你刚才给出的方案存在xxx问题，下面请你给出一个更好的方案，并解释新方案为什么更好”</li>
+                <li>重复步骤2-3，直到得到满意的答案</li>
+            </ol>
+            <div class="note">
+                <strong>注意事项</strong>：逐步深入描述需求，让AI精准理解；可多次迭代，持续优化回答质量；适用于需要持续打磨的内容（如文案、方案）
+            </div>
+        </div>
+
+        <div id="sec17" class="section">
+            <h2>十七、迭代式提问：像玩游戏一样“练级”</h2>
+            <h3>核心逻辑</h3>
+            <p>通过持续反馈，让AI不断优化回答，像游戏升级一样提升回答质量，适用于<strong>内容创作、方案打磨、需求迭代</strong>。</p>
+            <h3>核心要求</h3>
+            <ul>
+                <li>明确具体、可量化、可验证的反馈</li>
+                <li>及时给AI明确的反馈，让其持续优化</li>
+                <li>结合需求，逐步调整提问方向</li>
+            </ul>
+            <div class="note">
+                <strong>注意事项</strong>：及时反馈，让AI精准理解需求；提供足够上下文，帮助AI持续优化；适用于需要持续迭代的内容（如产品方案、营销文案）
+            </div>
+        </div>
+
+        <div id="sec18" class="section">
+            <h2>十八、进阶式提问：循序渐进地处理复杂信息</h2>
+            <h3>核心逻辑</h3>
+            <p>由浅入深、逐步递进地提问，拆解复杂问题，适用于<strong>复杂项目、深度研究、系统学习</strong>。</p>
+            <h3>操作要点</h3>
+            <ul>
+                <li>明确问题核心，拆解为多个子问题</li>
+                <li>按逻辑顺序逐步提问，先基础后深入</li>
+                <li>每个子问题解决后，再推进下一个</li>
+                <li>确保每个环节的回答准确，再深入提问</li>
+            </ul>
+            <div class="note">
+                <strong>注意事项</strong>：明确问题边界，避免偏离主题；按逻辑顺序提问，提升效率；适用于复杂系统、深度研究等场景
+            </div>
+        </div>
+
+        <div id="sec19" class="section">
+            <h2>十九、人情练达提问：让AI更有“人情味”</h2>
+            <h3>核心逻辑</h3>
+            <p>用更亲切、有温度的语言提问，让AI生成更具情感、更贴合需求的回答，适用于<strong>情感沟通、文案创作、人际沟通</strong>。</p>
+            <h3>操作要点</h3>
+            <ul>
+                <li>用亲切、友好的语气提问，避免过于正式/技术化</li>
+                <li>表达情感需求，引导AI共情回应</li>
+                <li>提供对话记录/场景背景，帮助AI理解情绪</li>
+            </ul>
+            <div class="note">
+                <strong>注意事项</strong>：明确情感需求，让AI精准把握语气；适用于情感沟通、文案创作、人际沟通等场景
+            </div>
+        </div>
+
+        <div id="sec20" class="section">
+            <h2>二十、多维视角提问：从不同维度思考</h2>
+            <h3>核心逻辑</h3>
+            <p>从多个维度/视角提问，全面分析问题，适用于<strong>复杂决策、方案评估、深度研究</strong>。</p>
+            <h3>操作要点</h3>
+            <ul>
+                <li>从不同维度（如用户、市场、技术、财务）提问</li>
+                <li>先获取相关信息，再针对性提问</li>
+                <li>结合多个视角，形成全面结论</li>
+            </ul>
+            <div class="note">
+                <strong>注意事项</strong>：明确每个维度的核心问题，避免混乱；适用于复杂决策、方案评估等场景
+            </div>
+        </div>
+
+        <div id="quick-ref" class="section">
+            <h2>快速参考表：20种方法一览</h2>
+            <table>
+                <tr>
+                    <th>方法</th>
+                    <th>核心特点</th>
+                    <th>最佳应用场景</th>
+                </tr>
+                <tr>
+                    <td><strong>指令式</strong></td>
+                    <td>明确要求、结构清晰</td>
+                    <td>标准化工作、规范流程</td>
+                </tr>
+                <tr>
+                    <td><strong>角色式</strong></td>
+                    <td>专业身份、增强权威性</td>
+                    <td>专业咨询、创意创作</td>
+                </tr>
+                <tr>
+                    <td><strong>关键词</strong></td>
+                    <td>聚焦核心、精准定位</td>
+                    <td>信息检索、问题拆解</td>
+                </tr>
+                <tr>
+                    <td><strong>示例式</strong></td>
+                    <td>样板示范、一致风格</td>
+                    <td>格式统一、批量生成</td>
+                </tr>
+                <tr>
+                    <td><strong>引导式</strong></td>
+                    <td>开放问题、深度思考</td>
+                    <td>头脑风暴、方案优化</td>
+                </tr>
+                <tr>
+                    <td><strong>发散式</strong></td>
+                    <td>多维视角、创意激发</td>
+                    <td>创意激发、问题解决</td>
+                </tr>
+                <tr>
+                    <td><strong>问答式</strong></td>
+                    <td>结构化问题、精准回答</td>
+                    <td>知识学习、信息检索</td>
+                </tr>
+                <tr>
+                    <td><strong>提炼式</strong></td>
+                    <td>信息浓缩、要点突出</td>
+                    <td>长文总结、报告提炼</td>
+                </tr>
+                <tr>
+                    <td><strong>对话式</strong></td>
+                    <td>场景模拟、人性化交互</td>
+                    <td>对话设计、话术生成</td>
+                </tr>
+                <tr>
+                    <td><strong>一致性</strong></td>
+                    <td>前后对应、逻辑自洽</td>
+                    <td>长文生成、方案撰写</td>
+                </tr>
+                <tr>
+                    <td><strong>整合式</strong></td>
+                    <td>多源合并、全面分析</td>
+                    <td>行业研究、报告撰写</td>
+                </tr>
+                <tr>
+                    <td><strong>多选式</strong></td>
+                    <td>选项聚焦、范围缩小</td>
+                    <td>决策辅助、方案筛选</td>
+                </tr>
+                <tr>
+                    <td><strong>约束式</strong></td>
+                    <td>框架限制、标准输出</td>
+                    <td>标准化输出、模板生成</td>
+                </tr>
+                <tr>
+                    <td><strong>对立式</strong></td>
+                    <td>反向思考、深度分析</td>
+                    <td>方案优化、风险评估</td>
+                </tr>
+                <tr>
+                    <td><strong>归纳式</strong></td>
+                    <td>分类整理、逻辑梳理</td>
+                    <td>信息梳理、知识总结</td>
+                </tr>
+                <tr>
+                    <td><strong>循环式</strong></td>
+                    <td>反馈迭代、逐步优化</td>
+                    <td>方案优化、内容打磨</td>
+                </tr>
+                <tr>
+                    <td><strong>迭代式</strong></td>
+                    <td>持续反馈、质量提升</td>
+                    <td>内容创作、需求迭代</td>
+                </tr>
+                <tr>
+                    <td><strong>进阶式</strong></td>
+                    <td>逐步深入、循序渐进</td>
+                    <td>复杂项目、深度研究</td>
+                </tr>
+                <tr>
+                    <td><strong>人情式</strong></td>
+                    <td>情感共鸣、温度表达</td>
+                    <td>情感沟通、文案创作</td>
+                </tr>
+                <tr>
+                    <td><strong>多维式</strong></td>
+                    <td>全方位分析、综合评估</td>
+                    <td>复杂决策、方案评估</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="cases" class="section">
+            <h2>实战案例：好的提问vs不好的提问</h2>
+            <h3>案例1：指令式提问</h3>
+            <p><strong>❌ 不好的提问：</strong></p>
+            <div class="bad-case">
+                "写一份营销方案"
+            </div>
+            <p><strong>✅ 好的提问：</strong></p>
+            <div class="good-case">
+                "我需要一份社交媒体营销方案，要求：1. 针对25-35岁白领人群；2. 包含3个月的内容计划；3. 明确预算分配；4. 包含成功指标和评估方法；5. 控制在2000字以内"
+            </div>
+
+            <h3>案例2：角色式提问</h3>
+            <p><strong>❌ 不好的提问：</strong></p>
+            <div class="bad-case">
+                "你是一个健身教练，告诉我怎样减肥"
+            </div>
+            <p><strong>✅ 好的提问：</strong></p>
+            <div class="good-case">
+                "假设你是一位获得NASM认证的专业健身教练，我是一名32岁的办公室员工，体重超标，没有运动经验。请为我制定一份8周的健身计划，包括：1. 每周3次训练安排；2. 具体动作示范；3. 饮食建议；4. 进度跟踪方法。注意避免运动伤害"
+            </div>
+
+            <h3>案例3：关键词提问</h3>
+            <p><strong>❌ 不好的提问：</strong></p>
+            <div class="bad-case">
+                "中国的事情"
+            </div>
+            <p><strong>✅ 好的提问：</strong></p>
+            <div class="good-case">
+                "2024年中国GDP增长数据、产业结构变化、关键经济指标分析"
+            </div>
+
+            <h3>案例4：引导式提问</h3>
+            <p><strong>❌ 不好的提问：</strong></p>
+            <div class="bad-case">
+                "怎样改进我的产品？"
+            </div>
+            <p><strong>✅ 好的提问：</strong></p>
+            <div class="good-case">
+                "我的产品是一个任务管理APP。让我们从用户视角思考：1. 现在有哪些用户痛点是我们没有解决的？2. 竞争对手做得比我们好的地方是什么？3. 如果从用户反馈看，最常见的抱怨是什么？4. 基于这些，我们应该优先改进哪三个功能？"
+            </div>
+
+            <h3>案例5：提炼式提问</h3>
+            <p><strong>❌ 不好的提问：</strong></p>
+            <div class="bad-case">
+                "总结一下这个文章" [贴2000字文章]
+            </div>
+            <p><strong>✅ 好的提问：</strong></p>
+            <div class="good-case">
+                "请阅读以下文章，并用200字以内总结核心观点，包括：1. 主要论点；2. 关键数据；3. 建议的行动方案。要求语言简洁、重点突出" [贴文章]
+            </div>
+        </div>
+
+        <div id="faq" class="section">
+            <h2>常见问题FAQ</h2>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Q1: 20种方法是否都要学习？ <span>+</span></div>
+                <div class="faq-answer">
+                    <p><strong>答：</strong> 不需要。建议按需学习。初期可重点掌握：指令式、角色式、引导式、提炼式这4种基础方法。随着使用经验增加，逐步拓展到其他方法。不同场景可能需要不同方法的组合。</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Q2: 为什么同样的问题，不同方式提问结果差异很大？ <span>+</span></div>
+                <div class="faq-answer">
+                    <p><strong>答：</strong> AI理解问题的准确度取决于问题的清晰度。当指令模糊时，AI会基于自己的理解填补空白，导致偏差。越清晰、越具体的提问，AI理解成本越低，回答质量越高。这是提问技巧的核心原理。</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Q3: 提问时长度越长越好吗？ <span>+</span></div>
+                <div class="faq-answer">
+                    <p><strong>答：</strong> 不是。关键是信息密度（有效信息占比）。冗余信息会分散AI的注意力。建议：精简表述，聚焦重点，用序号/加粗强调核心要求。做到"大道至简"——用最少的字数传达最清晰的含义。</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Q4: AI回答不满意怎么办？ <span>+</span></div>
+                <div class="faq-answer">
+                    <p><strong>答：</strong> 可尝试：1. 明确指出问题所在（"你的回答过于笼统"）；2. 补充背景信息（"我的场景是..."）；3. 调整提问方式（换个角色、换个关键词）；4. 循环/迭代提问要求优化；5. 多轮对话逐步引导。</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Q5: 应该如何选择合适的提问方法？ <span>+</span></div>
+                <div class="faq-answer">
+                    <p><strong>答：</strong> 看场景和目标：1. 明确输出格式 → 约束式；2. 需要专业观点 → 角色式；3. 需要多个创意 → 发散式；4. 需要精简总结 → 提炼式；5. 需要深度思考 → 引导式。参考本指南的"快速参考表"和"速查工具"可快速定位。</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Q6: 可以同时用多个提问方法吗？ <span>+</span></div>
+                <div class="faq-answer">
+                    <p><strong>答：</strong> 可以且推荐！很多复杂问题需要方法组合。比如：指令式+角色式（给专业身份+明确指令）、引导式+多选式（开放思考+选项聚焦）等。具体组合方案见"方法组合指南"。</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Q7: AI会学习我的提问习惯吗？ <span>+</span></div>
+                <div class="faq-answer">
+                    <p><strong>答：</strong> 单次对话中AI会参考上下文。但跨对话、跨平台，AI不会记住你的风格。所以每次提问都要清晰完整。建议保存你常用的"提问模板"，多次复用可提高效率。</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Q8: 是否存在"万能"的提问方法？ <span>+</span></div>
+                <div class="faq-answer">
+                    <p><strong>答：</strong> 没有万能方法，但"指令式+明确性+循环反馈"的组合接近高效方案。关键是：了解你的目标 → 拆解问题 → 清晰表述 → 根据反馈调整。这个循环能应对大多数场景。</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="combo" class="section">
+            <h2>方法组合指南：1+1&gt;2的威力</h2>
+            <h3>为什么要组合使用？</h3>
+            <p>单一方法应对简单问题，复杂问题需要方法组合。组合能增强表达清晰度、拓展思考深度、提升回答质量。</p>
+
+            <h3>经典组合方案</h3>
+            
+            <h4>组合1：指令式 + 角色式 <span class="combo-badge">适合：专业咨询</span></h4>
+            <p><strong>用法：</strong> 明确专业身份 + 具体任务要求</p>
+            <p><strong>示例：</strong> "你是一位资深财务顾问。我需要一份个人理财方案，包括：投资配置、税收优化、风险防控。针对35岁、年收入50万的情况。"</p>
+
+            <h4>组合2：引导式 + 多选式 <span class="combo-badge">适合：头脑风暴</span></h4>
+            <p><strong>用法：</strong> 开放问题激发创意 + 选项帮助聚焦</p>
+            <p><strong>示例：</strong> "我想改进客户服务。有哪些可能的方向？选项包括：(A)增加在线客服; (B)缩短响应时间; (C)提供个性化服务; (D)建立客户社区; (E)其他想法?"</p>
+
+            <h4>组合3：示例式 + 约束式 <span class="combo-badge">适合：批量生成</span></h4>
+            <p><strong>用法：</strong> 先出示例确认风格 + 再加约束确保一致</p>
+            <p><strong>示例：</strong> "请先生成1条推文示例（描述产品特点，80字内）。确认风格后，按同样风格为我生成5条不同角度的推文。"</p>
+
+            <h4>组合4：进阶式 + 循环式 <span class="combo-badge">适合：深度研究</span></h4>
+            <p><strong>用法：</strong> 逐步深入提问 + 每步都优化反馈</p>
+            <p><strong>示例：</strong> 第1步："解释AI的工作原理"；反馈优化后；第2步："解释神经网络"；再反馈优化；第3步："深入讲解Transformer架构"</p>
+
+            <h4>组合5：发散式 + 对立式 <span class="combo-badge">适合：方案评估</span></h4>
+            <p><strong>用法：</strong> 多角度思考 + 反向思考验证</p>
+            <p><strong>示例：</strong> "从用户、市场、技术、财务4个维度分析这个产品方案。同时，如果这个方案失败了，最可能的原因是什么？"</p>
+
+            <h4>组合6：关键词 + 信息整合 <span class="combo-badge">适合：行业研究</span></h4>
+            <p><strong>用法：</strong> 精准关键词定位 + 整合多源信息</p>
+            <p><strong>示例：</strong> "整合关于'AI在医疗应用'的最新信息，包括：市场现状、关键玩家、技术进展、监管趋势、投资机会。"</p>
+
+            <h4>组合7：问答式 + 提炼式 <span class="combo-badge">适合：学习总结</span></h4>
+            <p><strong>用法：</strong> 结构化问题学习 + 最后浓缩总结</p>
+            <p><strong>示例：</strong> "用3个问题教我理解'量子计算'：1.是什么；2.有什么优势；3.实际应用。最后用100字总结核心概念。"</p>
+        </div>
+
+        <div id="guide" class="section">
+            <h2>速查工具：智能提问决策指南</h2>
+            <h3>根据你的需求，快速定位最适合的提问方法</h3>
+
+            <div class="decision-tree">
+                <h4>🎯 你的主要目标是什么？</h4>
+                
+                <h5 style="margin-top: 15px;">获取信息/知识</h5>
+                <div class="tree-node">
+                    → 需要精准数据或定义：<strong>关键词提问</strong><br>
+                    → 需要详细解释：<strong>问答式提问</strong><br>
+                    → 需要总结版本：<strong>提炼式提问</strong><br>
+                    → 需要多角度分析：<strong>多维视角提问</strong>
+                </div>
+
+                <h5 style="margin-top: 15px;">创意/方案输出</h5>
+                <div class="tree-node">
+                    → 需要多个想法：<strong>发散式提问</strong><br>
+                    → 需要激发灵感：<strong>引导式提问</strong><br>
+                    → 需要专业视角：<strong>角色式提问</strong><br>
+                    → 需要方案对比：<strong>对立式提问</strong>
+                </div>
+
+                <h5 style="margin-top: 15px;">内容/文案生成</h5>
+                <div class="tree-node">
+                    → 需要格式统一：<strong>示例式+约束式</strong><br>
+                    → 需要风格一致：<strong>示例式提问</strong><br>
+                    → 需要情感共鸣：<strong>人情练达提问</strong><br>
+                    → 需要对话内容：<strong>对话式提问</strong>
+                </div>
+
+                <h5 style="margin-top: 15px;">决策/问题解决</h5>
+                <div class="tree-node">
+                    → 需要明确方案：<strong>指令式提问</strong><br>
+                    → 需要多方案选择：<strong>多项选择提问</strong><br>
+                    → 需要风险评估：<strong>对立式提问</strong><br>
+                    → 需要全面分析：<strong>发散式+多维式</strong>
+                </div>
+
+                <h5 style="margin-top: 15px;">内容精细化</h5>
+                <div class="tree-node">
+                    → 初稿需要优化：<strong>循环式/迭代式提问</strong><br>
+                    → 需要逐步细化：<strong>进阶式提问</strong><br>
+                    → 需要保持一致：<strong>信息一致性提问</strong>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 30px;">⚡ 快速选择Tips</h3>
+            <ul>
+                <li><strong>不确定怎么提问？</strong> → 先用<strong>指令式</strong>：明确说出"要什么、怎么要、要多少"</li>
+                <li><strong>回答太笼统？</strong> → 加<strong>约束条件</strong>：字数/格式/角度限制</li>
+                <li><strong>想要多个答案？</strong> → 用<strong>发散式</strong>或<strong>多选式</strong></li>
+                <li><strong>想要深度思考？</strong> → 用<strong>引导式</strong>或<strong>苏格拉底式</strong></li>
+                <li><strong>对答案不满意？</strong> → 用<strong>循环式</strong>反馈优化</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>© 2025 秒懂AI提问 | 让AI成为你的超级助手</p>
+        </footer>
+    </div>
+
+    <script>
+        // 深色主题切换
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.style.colorScheme === 'dark';
+            
+            if (isDark) {
+                html.style.colorScheme = 'light';
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+                document.querySelector('.theme-toggle').textContent = '🌙深色';
+            } else {
+                html.style.colorScheme = 'dark';
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+                document.querySelector('.theme-toggle').textContent = '☀️浅色';
+            }
+        }
+
+        // 页面加载时恢复主题设置
+        window.addEventListener('load', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.documentElement.style.colorScheme = 'dark';
+                document.querySelector('.theme-toggle').textContent = '☀️浅色';
+            }
+        });
+
+        // 返回顶部按钮
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // FAQ 切换
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+            const icon = element.querySelector('.faq-question span');
+            if (element.classList.contains('active')) {
+                icon.textContent = '−';
+            } else {
+                icon.textContent = '+';
+            }
+        }
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
