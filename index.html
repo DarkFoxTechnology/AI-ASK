@@ -2120,25 +2120,57 @@
             }
 
             function clearHighlights() {
-                document.querySelectorAll(`.${CONFIG.HIGHLIGHT_CLASS}`).forEach(el => {
-                    const parent = el.parentNode;
-                    while (el.firstChild) {
-                        parent.insertBefore(el.firstChild, el);
-                    }
-                    parent.removeChild(el);
+                document.querySelectorAll(`.${CONFIG.HIGHLIGHT_CLASS}`).forEach(mark => {
+                    const parent = mark.parentNode;
+                    const textNode = document.createTextNode(mark.textContent);
+                    parent.replaceChild(textNode, mark);
                 });
             }
 
             function highlightElement(element, searchTerm) {
-                if (!element) return;
+                if (!element || !searchTerm) return;
+                
+                // 清除现有高亮
+                clearHighlights();
+                
+                const text = element.textContent;
                 const escapedTerm = escapeRegExp(searchTerm);
                 const regex = new RegExp(`(${escapedTerm})`, 'gi');
-                const html = element.innerHTML;
                 
-                // 避免重复高亮
-                if (html.includes('<mark')) return;
+                if (!regex.test(text)) return;
                 
-                element.innerHTML = html.replace(regex, '<mark class="' + CONFIG.HIGHLIGHT_CLASS + '">$1</mark>');
+                // 使用更安全的方式处理高亮
+                const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+                const nodesToHighlight = [];
+                
+                while (walker.nextNode()) {
+                    const node = walker.currentNode;
+                    if (regex.test(node.textContent)) {
+                        nodesToHighlight.push(node);
+                    }
+                }
+                
+                nodesToHighlight.forEach(node => {
+                    const text = node.textContent;
+                    const parent = node.parentNode;
+                    
+                    // 分割文本并创建高亮元素
+                    const parts = text.split(regex);
+                    const fragment = document.createDocumentFragment();
+                    
+                    parts.forEach(part => {
+                        if (regex.test(part)) {
+                            const mark = document.createElement('mark');
+                            mark.className = CONFIG.HIGHLIGHT_CLASS;
+                            mark.textContent = part;
+                            fragment.appendChild(mark);
+                        } else if (part) {
+                            fragment.appendChild(document.createTextNode(part));
+                        }
+                    });
+                    
+                    parent.replaceChild(fragment, node);
+                });
             }
 
             function escapeRegExp(string) {
